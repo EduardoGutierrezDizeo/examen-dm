@@ -4,16 +4,22 @@ Aplicación Flutter académica de administración de videojuegos. El catálogo y
 
 ## Base de datos
 
-La app usa `mysql_client` para conectarse por TCP a MySQL/MariaDB de XAMPP en `127.0.0.1:3306` (base `examen_videojuegos`, usuario `root` sin contraseña, sin TLS). Al usar una conexión TCP directa, **no funciona en web/Chrome**: ejecútala en escritorio Windows o en móvil con el servidor accesible.
+La app usa `mysql_client` para conectarse por TCP a MySQL/MariaDB de XAMPP en `127.0.0.1:3306` (base `examen_videojuegos`, usuario `root`, contraseña `root123`, sin TLS). `mysql_client` no autentica contra cuentas con contraseña vacía, por eso `root` debe tener contraseña; configúrala con:
+
+```cmd
+"C:\xampp\mysql\bin\mysql.exe" -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root123'; FLUSH PRIVILEGES;"
+```
+
+Después de eso, el cliente de MySQL necesita `-proot123`. Al usar una conexión TCP directa, **no funciona en web/Chrome**: ejecútala en escritorio Windows o en móvil con el servidor accesible.
 
 El script `sql/examen_videojuegos.sql` crea las tablas `usuario`, `videojuego` y `dlc` y las llena con datos iniciales (videojuegos reales y sus DLC).
 
 ## Cómo ejecutar
 
 1. Encender Apache y MySQL en XAMPP.
-2. Importar `sql/examen_videojuegos.sql` desde phpMyAdmin (`http://localhost/phpmyadmin`).
+2. Asignar la contraseña a `root` (comando de la sección anterior) e importar `sql/examen_videojuegos.sql` desde phpMyAdmin (`http://localhost/phpmyadmin`) o con `"C:\xampp\mysql\bin\mysql.exe" -u root -proot123 < sql\examen_videojuegos.sql` en CMD.
 3. `flutter pub get`
-4. `flutter run -d windows`
+4. `flutter run -d windows` (la ventana se abre sola; también puedes ejecutar directamente `build\windows\x64\runner\Debug\cuenta.exe` después de compilar).
 
 ## Usuarios de prueba
 

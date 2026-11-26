@@ -26,7 +26,7 @@ class DatabaseHelper {
       host: "127.0.0.1",
       port: 3306,
       userName: "root",
-      password: "",
+      password: "root123",
       databaseName: "examen_videojuegos",
       secure: false,
     );
